@@ -719,11 +719,17 @@
     const btn = form.querySelector('.btn-submit');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector('input[type="email"]').value;
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showFormMsg('Veuillez saisir une adresse email valide.', false);
-        return;
-      }
+      const etablissement = form.querySelector('input[name="etablissement"]').value.trim();
+      const email = form.querySelector('input[type="email"]').value.trim();
+      const type = form.querySelector('select[name="type"]').value;
+
+      if (!etablissement) { showFormMsg('Veuillez indiquer le nom de votre établissement.', false); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormMsg('Veuillez saisir une adresse email valide.', false); return; }
+      if (!type) { showFormMsg('Veuillez sélectionner le type d\'établissement.', false); return; }
+
+      // Objet mail dynamique
+      form.querySelector('input[name="_subject"]').value = 'Nouvelle demande de devis - ' + etablissement;
+
       btn.disabled = true;
       btn.textContent = 'Envoi en cours…';
       try {
