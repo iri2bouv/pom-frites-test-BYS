@@ -712,6 +712,44 @@
   function closeMenu() { mobileMenu.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }
   const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } }); }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Formulaire Formspree — soumission AJAX avec messages en français
+  const form = document.querySelector('form[action*="formspree"]');
+  if (form) {
+    const btn = form.querySelector('.btn-submit');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input[type="email"]').value;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFormMsg('Veuillez saisir une adresse email valide.', false);
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (res.ok) {
+          form.reset();
+          showFormMsg('Votre demande a bien été envoyée. Nous vous répondons sous 24h.', true);
+          btn.textContent = 'Envoyé ✓';
+        } else {
+          showFormMsg('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.', false);
+          btn.disabled = false;
+          btn.textContent = 'Envoyer la demande →';
+        }
+      } catch {
+        showFormMsg('Impossible d\'envoyer le formulaire. Vérifiez votre connexion et réessayez.', false);
+        btn.disabled = false;
+        btn.textContent = 'Envoyer la demande →';
+      }
+    });
+  }
+  function showFormMsg(msg, success) {
+    let el = document.getElementById('form-msg');
+    if (!el) { el = document.createElement('p'); el.id = 'form-msg'; el.style.cssText = 'margin-top:12px;font-size:14px;font-weight:500;text-align:center'; form.after(el); }
+    el.style.color = success ? '#3D7A52' : '#C8522E';
+    el.textContent = msg;
+  }
 </script>
 </body>
 </html>
