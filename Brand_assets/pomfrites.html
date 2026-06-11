@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pom'Frites — Frites Fraîches Professionnelles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #FFFFFF; --off: #FAFAF7;
+      --sun: #F5A623; --sun-light: #FFD166;
+      --green: #3D9A5C; --green-light: #6DBF82;
+      --dark: #1C1C1A; --text: #2D2D2A;
+      --muted: #888880; --border: #E8E8E2;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Instrument Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; height: 60px;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; color: var(--dark); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--sun); }
+    .nav-desktop { display: none; gap: 28px; list-style: none; align-items: center; }
+    .nav-desktop a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-desktop a:hover { color: var(--dark); }
+    .nav-cta { background: var(--green) !important; color: white !important; padding: 9px 18px; border-radius: 100px; }
+    .nav-cta:hover { background: var(--green-light) !important; }
+    .burger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .burger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; }
+    .mobile-menu {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 16px 20px 20px; z-index: 99; flex-direction: column; gap: 0;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { display: block; font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu .m-cta { margin-top: 12px; background: var(--green); color: white; text-align: center; padding: 14px; border-radius: 12px; border-bottom: none; font-weight: 600; }
+
+    /* HERO — mobile first: stacked */
+    #hero { padding-top: 60px; display: flex; flex-direction: column; }
+    .hero-content {
+      padding: 44px 20px 36px; background: var(--off);
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #FFF3DC; color: #C8820A;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 22px;
+    }
+    .hero-tag::before { content: '●'; font-size: 7px; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+    h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(44px, 11vw, 86px); line-height: 1.0; letter-spacing: -0.03em; color: var(--dark); margin-bottom: 18px; }
+    h1 .sun { color: var(--sun); font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+    h1 .grn { color: var(--green); }
+    .hero-desc { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-sun { background: var(--sun); color: white; padding: 13px 26px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; border-radius: 100px; text-decoration: none; box-shadow: 0 4px 18px rgba(245,166,35,.35); transition: background .2s, transform .2s; }
+    .btn-sun:hover { background: #E8950F; transform: translateY(-2px); }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--text); padding: 12px 22px; font-size: 14px; font-weight: 500; border-radius: 100px; text-decoration: none; transition: border-color .2s; }
+    .btn-outline:hover { border-color: var(--dark); }
+
+    /* hero image: single strip on mobile */
+    .hero-imgs { height: 220px; display: grid; grid-template-columns: 2fr 1fr; gap: 2px; overflow: hidden; }
+    .hi { overflow: hidden; }
+    .hi img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hi.third { display: none; }
+
+    /* TICKER */
+    .ticker { background: var(--sun); overflow: hidden; padding: 12px 0; }
+    .ticker-track { display: flex; gap: 48px; white-space: nowrap; animation: scroll 22s linear infinite; width: max-content; }
+    @keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .ticker-item { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: white; display: flex; align-items: center; gap: 16px; }
+    .ticker-item::after { content: '✦'; opacity: .5; }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+    .stat { padding: 24px 16px; text-align: center; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stat:nth-child(2n) { border-right: none; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 26px; line-height: 1; color: var(--dark); letter-spacing: -0.02em; }
+    .stat-num.c { color: var(--sun); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+    /* SECTIONS */
+    .section { padding: 56px 20px; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .eyebrow::before { content: ''; width: 16px; height: 2px; background: var(--green); border-radius: 2px; display: block; }
+    .eyebrow.center { justify-content: center; }
+    .eyebrow.center::before { display: none; }
+    h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(30px, 8vw, 56px); letter-spacing: -0.03em; line-height: 1.05; color: var(--dark); margin-bottom: 14px; }
+    h2 .sun { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--sun); }
+    h2 .grn { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--green); }
+    h2.white { color: white; }
+
+    /* PROCESS */
+    #process { background: var(--off); padding: 56px 20px; }
+    .process-intro { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
+    .process-cards { display: flex; flex-direction: column; gap: 12px; }
+    .pc { background: white; border-radius: 16px; padding: 24px 20px; border: 1px solid var(--border); position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+    .pc:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.08); }
+    .pc-num { position: absolute; top: -8px; right: 12px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 64px; color: var(--border); line-height: 1; }
+    .pc-emoji { font-size: 26px; margin-bottom: 12px; }
+    .pc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: var(--dark); margin-bottom: 7px; }
+    .pc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+    /* PRODUITS */
+    #produits { padding: 56px 20px; }
+    .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 28px; }
+    .pp { border-radius: 14px; overflow: hidden; position: relative; aspect-ratio: 3/4; background: var(--off); }
+    .pp img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pp-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 12px 12px; background: linear-gradient(to top, rgba(28,28,26,.85) 0%, transparent 100%); }
+    .pp-tag { font-size: 9px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--sun-light); margin-bottom: 3px; }
+    .pp-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: white; line-height: 1.2; }
+    .pp.span2 { grid-column: span 2; aspect-ratio: 16/7; }
+    .pp.cta-card { background: linear-gradient(135deg, var(--sun), var(--sun-light)); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; text-align: center; }
+    .pp.cta-card .cta-t { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; color: white; margin-bottom: 7px; }
+    .pp.cta-card .cta-s { font-size: 11px; color: rgba(255,255,255,.8); line-height: 1.5; }
+
+    /* POURQUOI */
+    #pourquoi { background: var(--green); padding: 56px 20px; }
+    #pourquoi .eyebrow { color: var(--sun-light); }
+    #pourquoi .eyebrow::before { background: var(--sun-light); }
+    .pourquoi-img { border-radius: 18px; overflow: hidden; aspect-ratio: 4/3; margin-bottom: 36px; position: relative; }
+    .pourquoi-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pourquoi-badge { position: absolute; top: 14px; right: 14px; background: white; border-radius: 12px; padding: 12px 14px; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+    .pb-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 24px; color: var(--green); line-height: 1; }
+    .pb-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .avantages { list-style: none; margin-top: 28px; }
+    .av { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.15); }
+    .av:first-child { border-top: 1px solid rgba(255,255,255,.15); }
+    .av-icon { width: 34px; height: 34px; min-width: 34px; background: rgba(255,255,255,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+    .av strong { display: block; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: white; margin-bottom: 2px; }
+    .av span { font-size: 12px; color: rgba(255,255,255,.6); font-weight: 300; }
+
+    /* REFERENCES */
+    #references { padding: 56px 20px; background: var(--off); text-align: center; }
+    .refs-sub { font-size: 14px; color: var(--muted); margin: 0 auto 28px; line-height: 1.7; }
+    .refs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+    .ref-chip { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 16px 12px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; color: var(--dark); text-align: left; transition: border-color .2s; }
+    .ref-chip:hover { border-color: var(--sun); }
+    .ref-type { font-family: 'Instrument Sans', sans-serif; font-weight: 400; font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .partners-strip { display: flex; gap: 20px; justify-content: center; align-items: center; padding: 20px; background: white; border-radius: 14px; border: 1px solid var(--border); }
+    .partner-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .partner-circle { width: 44px; height: 44px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 10px; color: white; }
+    .partner-name { font-size: 11px; font-weight: 500; color: var(--muted); text-align: center; }
+
+    /* CONTACT */
+    #contact { padding: 56px 20px; background: white; }
+    .contact-sub { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+    .contact-infos { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+    .cc { display: flex; align-items: center; gap: 12px; padding: 13px 14px; background: var(--off); border-radius: 12px; border: 1px solid var(--border); }
+    .cc-icon { width: 34px; height: 34px; background: white; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 2px 8px rgba(0,0,0,.06); flex-shrink: 0; }
+    .cc-text { font-size: 13px; color: var(--text); }
+    .cc-text a { color: inherit; text-decoration: none; font-weight: 500; }
+    .cc-text a:hover { color: var(--green); }
+    .contact-form { background: var(--off); border-radius: 18px; padding: 24px 18px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px; }
+    .contact-form h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--dark); margin-bottom: 4px; }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fg label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .fg input, .fg select, .fg textarea { background: white; border: 1.5px solid var(--border); border-radius: 11px; padding: 12px 13px; font-size: 14px; font-family: 'Instrument Sans', sans-serif; color: var(--text); outline: none; transition: border-color .2s; -webkit-appearance: none; width: 100%; }
+    .fg input::placeholder, .fg textarea::placeholder { color: #C0C0B8; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--green); }
+    .fg textarea { resize: vertical; min-height: 90px; }
+    .btn-green { background: var(--green); color: white; padding: 15px; width: 100%; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; border: none; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 18px rgba(61,154,92,.3); transition: background .2s; }
+    .btn-green:hover { background: var(--green-light); }
+
+    /* FOOTER */
+    footer { background: var(--dark); padding: 28px 20px; display: flex; flex-direction: column; gap: 14px; }
+    .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: rgba(255,255,255,.7); }
+    .footer-logo span { color: var(--sun); }
+    .footer-info { font-size: 12px; color: rgba(255,255,255,.35); line-height: 1.6; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: rgba(255,255,255,.8); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: .08s; }
+    .d2 { transition-delay: .16s; }
+
+    /* DESKTOP */
+    @media (min-width: 768px) {
+      nav { padding: 0 48px; height: 68px; }
+      .burger { display: none; }
+      .nav-desktop { display: flex; }
+
+      #hero { flex-direction: row; min-height: 100vh; }
+      .hero-content { flex: 1; padding: 80px 64px; justify-content: center; }
+      .hero-imgs { flex: 1; height: 100vh; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; display: grid; }
+      .hi.featured { grid-row: 1 / 3; }
+      .hi.third { display: block; }
+
+      .stats { grid-template-columns: repeat(4, 1fr); }
+      .stat { border-bottom: none; }
+      .stat:nth-child(2n) { border-right: 1px solid var(--border); }
+      .stat:nth-child(4) { border-right: none; }
+      .stat-num { font-size: 34px; }
+
+      .section { padding: 96px 64px; }
+      #process { padding: 96px 64px; }
+      .process-cards { flex-direction: row; }
+
+      #produits { padding: 96px 64px; }
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+      .pp.span2 { grid-column: span 1; aspect-ratio: 3/4; }
+
+      #pourquoi { padding: 96px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+      .pourquoi-img { margin-bottom: 0; }
+
+      #references { padding: 96px 64px; }
+      .refs-grid { grid-template-columns: repeat(3, 1fr); max-width: 800px; margin: 0 auto 24px; }
+
+      #contact { padding: 96px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+      .contact-form { padding: 36px 32px; }
+      .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .btn-green { width: auto; padding: 15px 36px; }
+
+      footer { flex-direction: row; justify-content: space-between; align-items: center; padding: 28px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">Pom<span>'</span>Frites</a>
+  <ul class="nav-desktop">
+    <li><a href="#process">Le Procédé</a></li>
+    <li><a href="#produits">Produits</a></li>
+    <li><a href="#references">Références</a></li>
+    <li><a href="#contact" class="nav-cta">Nous contacter</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#process" onclick="closeMenu()">Le Procédé</a>
+  <a href="#produits" onclick="closeMenu()">Produits</a>
+  <a href="#references" onclick="closeMenu()">Références</a>
+  <a href="#contact" class="m-cta" onclick="closeMenu()">Nous contacter</a>
+</div>
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Fournisseur pro — Gard &amp; Hérault</div>
+    <h1>La frite<br><span class="sun">fraîche,</span><br><span class="grn">livrée.</span></h1>
+    <p class="hero-desc">Pommes de terre taillées chaque jour, conditionnées sous vide, livrées en circuit court depuis Lunel.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-sun">Demander un devis</a>
+      <a href="#produits" class="btn-outline">Voir les produits</a>
+    </div>
+  </div>
+  <div class="hero-imgs">
+    <div class="hi featured">
+      <img src="https://images.unsplash.com/photo-1639024471283-03518883512d?w=800&auto=format&fit=crop&q=80" alt="Pommes de terre">
+    </div>
+    <div class="hi">
+      <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&auto=format&fit=crop&q=80" alt="Frites">
+    </div>
+    <div class="hi third">
+      <img src="https://images.unsplash.com/photo-1548340748-6af7b7ada2c8?w=400&auto=format&fit=crop&q=80" alt="Chips">
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item">Taillage quotidien</div>
+    <div class="ticker-item">Sous vide 5 kg</div>
+    <div class="ticker-item">Livraison gratuite</div>
+    <div class="ticker-item">Circuit court Aigues-Mortes</div>
+    <div class="ticker-item">Gard &amp; Hérault</div>
+    <div class="ticker-item">Pommes de terre des sables</div>
+    <div class="ticker-item">Taillage quotidien</div>
+    <div class="ticker-item">Sous vide 5 kg</div>
+    <div class="ticker-item">Livraison gratuite</div>
+    <div class="ticker-item">Circuit court Aigues-Mortes</div>
+    <div class="ticker-item">Gard &amp; Hérault</div>
+    <div class="ticker-item">Pommes de terre des sables</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num c">Daily</div><div class="stat-label">Taillage frais chaque matin</div></div>
+  <div class="stat"><div class="stat-num">5 kg</div><div class="stat-label">Poches sous vide pro</div></div>
+  <div class="stat"><div class="stat-num">2 dpts</div><div class="stat-label">Gard &amp; Hérault</div></div>
+  <div class="stat"><div class="stat-num c">Free</div><div class="stat-label">Livraison sans minimum</div></div>
+</div>
+
+<section id="process">
+  <div class="eyebrow">Notre approche</div>
+  <h2>Du champ à<br>votre <span class="sun">cuisine</span></h2>
+  <p class="process-intro">Un process simple et rigoureux : sélection, taillage, conditionnement — chaque jour, pour que vos produits arrivent impeccables.</p>
+  <div class="process-cards">
+    <div class="pc reveal" data-num="01"><div class="pc-num">01</div><div class="pc-emoji">🌱</div><div class="pc-title">Sélection variétale</div><p class="pc-desc">Sélection quotidienne des meilleures variétés selon la saison. Circuit court depuis Aigues-Mortes (30220).</p></div>
+    <div class="pc reveal d1" data-num="02"><div class="pc-num">02</div><div class="pc-emoji">🔪</div><div class="pc-title">Taillage sur mesure</div><p class="pc-desc">Lavées, épluchées, taillées selon vos besoins : frites, allumettes, chips, lamelles, cubes, potatoes.</p></div>
+    <div class="pc reveal d2" data-num="03"><div class="pc-num">03</div><div class="pc-emoji">📦</div><div class="pc-title">Conditionnement sous vide</div><p class="pc-desc">Poches de 5 kg sous vide pour maximiser la DLC. Fraîcheur préservée, gestion simplifiée.</p></div>
+  </div>
+</section>
+
+<section id="produits">
+  <div class="eyebrow">Gamme complète</div>
+  <h2>Nos <span class="sun">produits</span></h2>
+  <div class="products-grid">
+    <div class="pp reveal"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=75" alt="Frites"><div class="pp-overlay"><div class="pp-tag">Standard</div><div class="pp-name">Frites Classiques</div></div></div>
+    <div class="pp reveal d1"><img src="https://images.unsplash.com/photo-1548340748-6af7b7ada2c8?w=600&auto=format&fit=crop&q=75" alt="Chips"><div class="pp-overlay"><div class="pp-tag">Fine</div><div class="pp-name">Chips Maison</div></div></div>
+    <div class="pp span2 reveal"><img src="https://images.unsplash.com/photo-1560717789-0ac7c58ac90a?w=800&auto=format&fit=crop&q=75" alt="Potatoes"><div class="pp-overlay"><div class="pp-tag">Rustique</div><div class="pp-name">Potatoes</div></div></div>
+    <div class="pp reveal"><img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&auto=format&fit=crop&q=75" alt="Gratin"><div class="pp-overlay"><div class="pp-tag">Lamelles</div><div class="pp-name">Gratin Dauphinois</div></div></div>
+    <div class="pp cta-card reveal d1"><div class="cta-t">Découpe sur mesure ?</div><div class="cta-s">Contactez-nous pour adapter le taillage à votre carte.</div></div>
+  </div>
+</section>
+
+<section id="pourquoi">
+  <div class="pourquoi-img reveal">
+    <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=800&auto=format&fit=crop&q=80" alt="Qualité">
+    <div class="pourquoi-badge"><div class="pb-num">+10</div><div class="pb-label">Références<br>actives</div></div>
+  </div>
+  <div>
+    <div class="eyebrow">Pourquoi nous choisir</div>
+    <h2 class="white">Le fait-maison<br>sans la <span class="sun">contrainte</span></h2>
+    <ul class="avantages">
+      <li class="av reveal"><div class="av-icon">🌿</div><div><strong>Meilleures variétés locales</strong><span>Sélection quotidienne selon la saison.</span></div></li>
+      <li class="av reveal d1"><div class="av-icon">🔪</div><div><strong>Large choix de découpes</strong><span>Toutes les déclinaisons adaptées à vos plats.</span></div></li>
+      <li class="av reveal d2"><div class="av-icon">✅</div><div><strong>Fraîcheur garantie</strong><span>Taillage du jour, sous vide pour une DLC optimisée.</span></div></li>
+      <li class="av reveal"><div class="av-icon">🚚</div><div><strong>Livraison gratuite</strong><span>Gard et Hérault, sans minimum de commande.</span></div></li>
+      <li class="av reveal d1"><div class="av-icon">📍</div><div><strong>Circuit court — Aigues-Mortes</strong><span>Pommes de terre des sables. Traçabilité totale.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="references">
+  <div class="eyebrow center">Ils nous font confiance</div>
+  <h2 style="text-align:center;">Nos <span class="grn">références</span></h2>
+  <p class="refs-sub">Restaurateurs, traiteurs, grandes surfaces — ils ont fait de Pom'Frites leur fournisseur de confiance.</p>
+  <div class="refs-grid reveal">
+    <div class="ref-chip">La Paillote Bambou<div class="ref-type">Restaurant</div></div>
+    <div class="ref-chip">Prose<div class="ref-type">Restaurant</div></div>
+    <div class="ref-chip">Papy Moïse<div class="ref-type">Restauration</div></div>
+    <div class="ref-chip">E.Leclerc<div class="ref-type">Grande distribution</div></div>
+    <div class="ref-chip">Soframa Aimargues<div class="ref-type">Distribution pro</div></div>
+    <div class="ref-chip">Metro Montpellier<div class="ref-type">Grossiste CHR</div></div>
+  </div>
+  <div class="partners-strip reveal">
+    <div class="partner-chip"><div class="partner-circle">SOF</div><div class="partner-name">Soframa<br>Aimargues</div></div>
+    <div style="width:1px;height:36px;background:var(--border);"></div>
+    <div class="partner-chip"><div class="partner-circle">MET</div><div class="partner-name">Metro<br>Montpellier</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div>
+    <div class="eyebrow">Travailler ensemble</div>
+    <h2>Passez votre<br>première <span class="grn">commande</span></h2>
+    <p class="contact-sub">Restaurateur, traiteur ou distributeur dans le Gard ou l'Hérault ? Contactez-nous pour un devis adapté.</p>
+    <div class="contact-infos">
+      <div class="cc"><div class="cc-icon">📞</div><div class="cc-text"><a href="tel:0785570408">07 85 57 04 08</a></div></div>
+      <div class="cc"><div class="cc-icon">✉️</div><div class="cc-text"><a href="mailto:pomfrites34@gmail.com">pomfrites34@gmail.com</a></div></div>
+      <div class="cc"><div class="cc-icon">📍</div><div class="cc-text">98 Impasse André Ampère, 34400 Lunel</div></div>
+    </div>
+  </div>
+  <form class="contact-form" onsubmit="return false;">
+    <h3>Demande de devis</h3>
+    <div class="fg-row">
+      <div class="fg"><label>Établissement</label><input type="text" placeholder="Restaurant Le Mistral"></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" placeholder="06 00 00 00 00"></div>
+    </div>
+    <div class="fg"><label>Email</label><input type="email" placeholder="contact@monrestaurant.fr"></div>
+    <div class="fg"><label>Type d'établissement</label>
+      <select>
+        <option value="">Sélectionner...</option>
+        <option>Restaurant</option>
+        <option>Brasserie / Bar</option>
+        <option>Traiteur</option>
+        <option>Grande distribution</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div class="fg"><label>Message</label><textarea placeholder="Volumes, découpes, fréquence de livraison..."></textarea></div>
+    <button type="submit" class="btn-green">Envoyer la demande →</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-logo">Pom<span>'</span>Frites</div>
+  <div class="footer-info">98 Impasse André Ampère, 34400 Lunel<br>SIRET 850 865 387 000 11</div>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/pomfrites.fritesfraiches" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/pom_frites/" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => menu.classList.toggle('open'));
+  function closeMenu() { menu.classList.remove('open'); }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
