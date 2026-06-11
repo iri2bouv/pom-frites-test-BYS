@@ -720,12 +720,16 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const etablissement = form.querySelector('input[name="etablissement"]').value.trim();
+      const telephone = form.querySelector('input[name="telephone"]').value.trim();
       const email = form.querySelector('input[type="email"]').value.trim();
       const type = form.querySelector('select[name="type"]').value;
+      const message = form.querySelector('textarea[name="message"]').value.trim();
 
       if (!etablissement) { showFormMsg('Veuillez indiquer le nom de votre établissement.', false); return; }
+      if (!telephone) { showFormMsg('Veuillez indiquer votre numéro de téléphone.', false); return; }
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormMsg('Veuillez saisir une adresse email valide.', false); return; }
       if (!type) { showFormMsg('Veuillez sélectionner le type d\'établissement.', false); return; }
+      if (!message) { showFormMsg('Veuillez indiquer un message.', false); return; }
 
       // Objet mail dynamique
       form.querySelector('input[name="_subject"]').value = 'Nouvelle demande de devis - ' + etablissement;
