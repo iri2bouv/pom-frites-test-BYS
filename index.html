@@ -56,8 +56,13 @@
   }
   </script>
 
+  <!-- Preload hero image (LCP) -->
+  <link rel="preload" as="image" href="Brand_assets/hero-frites.webp" type="image/webp">
+  <!-- Fonts non-bloquantes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -388,7 +393,10 @@
 <!-- HERO -->
 <section id="hero" aria-label="Accueil">
   <div class="hero-img">
-    <img src="Brand_assets/hero-frites.png" alt="" loading="eager">
+    <picture>
+      <source srcset="Brand_assets/hero-frites.webp" type="image/webp">
+      <img src="Brand_assets/hero-frites.png" alt="" loading="eager" fetchpriority="high">
+    </picture>
   </div>
   <div class="hero-inner">
     <img src="logo-officiel.svg" alt="Pom'Frites" style="height:90px;width:auto;margin-bottom:20px;display:block;">
@@ -581,23 +589,23 @@
     <h2 class="on-dark reveal d1">Nos <em>produits</em></h2>
     <div class="prod-grid">
       <div class="prod-tile reveal">
-        <div class="prod-inner"><img src="Brand_assets/frites-epaisses.png" alt="Frites épaisses" loading="lazy"></div>
+        <div class="prod-inner"><picture><source srcset="Brand_assets/frites-epaisses.webp" type="image/webp"><img src="Brand_assets/frites-epaisses.png" alt="Frites épaisses" loading="lazy"></picture></div>
         <div class="prod-over"><div class="prod-cat">Standard</div><div class="prod-name">Frites Épaisses</div></div>
       </div>
       <div class="prod-tile reveal d1">
-        <div class="prod-inner"><img src="Brand_assets/frites-fines.png" alt="Frites fines" loading="lazy"></div>
+        <div class="prod-inner"><picture><source srcset="Brand_assets/frites-fines.webp" type="image/webp"><img src="Brand_assets/frites-fines.png" alt="Frites fines" loading="lazy"></picture></div>
         <div class="prod-over"><div class="prod-cat">Fine</div><div class="prod-name">Frites Fines</div></div>
       </div>
       <div class="prod-tile reveal d2">
-        <div class="prod-inner"><img src="Brand_assets/pommes-sautees.png" alt="Pommes sautées" loading="lazy"></div>
+        <div class="prod-inner"><picture><source srcset="Brand_assets/pommes-sautees.webp" type="image/webp"><img src="Brand_assets/pommes-sautees.png" alt="Pommes sautées" loading="lazy"></picture></div>
         <div class="prod-over"><div class="prod-cat">Cubes</div><div class="prod-name">Pommes Sautées</div></div>
       </div>
       <div class="prod-tile reveal d2">
-        <div class="prod-inner"><img src="Brand_assets/gratin-dauphinois.png" alt="Gratin Dauphinois" loading="lazy"></div>
+        <div class="prod-inner"><picture><source srcset="Brand_assets/gratin-dauphinois.webp" type="image/webp"><img src="Brand_assets/gratin-dauphinois.png" alt="Gratin Dauphinois" loading="lazy"></picture></div>
         <div class="prod-over"><div class="prod-cat">Lamelles</div><div class="prod-name">Gratin Dauphinois</div></div>
       </div>
       <div class="prod-tile reveal d3">
-        <div class="prod-inner"><img src="Brand_assets/patatas-bravas.png" alt="Patatas Bravas" loading="lazy"></div>
+        <div class="prod-inner"><picture><source srcset="Brand_assets/patatas-bravas.webp" type="image/webp"><img src="Brand_assets/patatas-bravas.png" alt="Patatas Bravas" loading="lazy"></picture></div>
         <div class="prod-over"><div class="prod-cat">Chunks</div><div class="prod-name">Patatas Bravas</div></div>
       </div>
     </div>
