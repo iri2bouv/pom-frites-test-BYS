@@ -229,22 +229,21 @@
     .tl-icon { margin-top: 10px; }
     .tl-icon svg { width: 36px; height: 36px; }
 
-    /* ── PRODUCTS — EDITORIAL ────────────────────────── */
-    #produits { background: var(--earth); }
-    .prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 28px; border-radius: 20px; overflow: hidden; }
-    .prod-tile { position: relative; overflow: hidden; }
-    .prod-inner { aspect-ratio: 3/4; overflow: hidden; }
-    .prod-inner img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s; }
-    .prod-tile:hover .prod-inner img { transform: scale(1.06); }
-    .prod-over { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 14px 14px; background: linear-gradient(to top, rgba(45,27,14,.95) 0%, rgba(45,27,14,.35) 45%, transparent 100%); }
-    .prod-cat { font-family: 'Caveat', cursive; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--terra2); margin-bottom: 3px; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
-    .prod-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 20px; color: white; letter-spacing: -.01em; text-shadow: 0 2px 10px rgba(0,0,0,.45); }
-    .prod-tile.cta { background: var(--terra); }
-    .prod-tile.cta .prod-inner { aspect-ratio: 3/4; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 20px 18px; }
-    .cta-lbl { font-family: 'Caveat', cursive; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 8px; }
-    .cta-ttl { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 22px; color: white; line-height: 1.1; margin-bottom: 14px; letter-spacing: -.01em; }
-    .cta-lnk { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.8); text-decoration: none; display: flex; align-items: center; gap: 5px; }
-    .cta-lnk:hover { color: white; }
+    /* ── PRODUCTS — CATALOGUE ────────────────────────── */
+    #produits { background: var(--cream); }
+    .prod-intro { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.8; max-width: 680px; margin-bottom: 36px; }
+    .prod-intro strong { color: var(--earth); font-weight: 500; }
+    .prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .prod-card { background: var(--white); border-radius: 18px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 3px 16px rgba(45,27,14,.06); transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+    .prod-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(45,27,14,.1); }
+    .prod-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+    .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s; }
+    .prod-card:hover .prod-img-wrap img { transform: scale(1.05); }
+    .prod-badge { position: absolute; top: 10px; left: 10px; background: rgba(45,27,14,.6); color: rgba(245,230,204,.92); font-family: 'Caveat', cursive; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 4px 11px; border-radius: 100px; backdrop-filter: blur(6px); }
+    .prod-card-info { padding: 13px 16px 16px; }
+    .prod-card-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 20px; color: var(--earth); letter-spacing: -.01em; }
+    .prod-meta { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); }
+    .prod-meta span { display: flex; align-items: center; gap: 7px; font-family: 'Caveat', cursive; font-size: 15px; font-weight: 600; color: var(--muted); }
 
     /* ── ENGAGEMENT / QUOTE ──────────────────────────── */
     #engagement { background: var(--herb); overflow: hidden; position: relative; }
@@ -351,8 +350,7 @@
       .timeline{gap:0}
       .tl-connector svg{width:20px;height:40px}
 
-      .prod-grid{grid-template-columns:repeat(3,1fr);border-radius:24px}
-      .prod-tile.cta .prod-inner{aspect-ratio:3/4}
+      .prod-grid{grid-template-columns:repeat(3,1fr);gap:20px}
 
       .eng-grid{flex-direction:row;gap:64px;align-items:center}
       .eng-quote-col{flex:1.2}
@@ -376,21 +374,19 @@
 <nav id="nav">
   <a href="#" class="nav-logo"><picture><source srcset="Brand_assets/logo.webp" type="image/webp"><img src="Brand_assets/logo.png" alt="Pom'Frites" /></picture></a>
   <ul class="nav-links">
-    <li><a href="#terroir">Notre Agria</a></li>
-    <li><a href="#process">Procédé</a></li>
-    <li><a href="#produits">Produits</a></li>
+    <li><a href="#produits">Nos produits</a></li>
+    <li><a href="#process">Notre procédé</a></li>
     <li><a href="#histoire">Notre histoire</a></li>
-    <li><a href="#references">Références</a></li>
+    <li><a href="#references">Nos références</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Demander un devis</a>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
-  <a href="#terroir" onclick="closeMenu()">Notre Agria</a>
-  <a href="#process" onclick="closeMenu()">Le Procédé</a>
-  <a href="#produits" onclick="closeMenu()">Produits</a>
+  <a href="#produits" onclick="closeMenu()">Nos produits</a>
+  <a href="#process" onclick="closeMenu()">Notre procédé</a>
   <a href="#histoire" onclick="closeMenu()">Notre histoire</a>
-  <a href="#references" onclick="closeMenu()">Références</a>
+  <a href="#references" onclick="closeMenu()">Nos références</a>
   <a href="#contact" class="m-cta" onclick="closeMenu()">Demander un devis</a>
 </nav>
 
@@ -445,9 +441,69 @@
 <section id="stats">
   <div class="stats-organic">
     <div class="stat-bubble reveal"><div class="stat-num t">100%</div><div class="stat-label">Fait maison</div></div>
-    <div class="stat-bubble reveal d1"><div class="stat-num h">100%</div><div class="stat-label">Naturel — zéro additif</div></div>
+    <div class="stat-bubble reveal d1"><div class="stat-num h" style="font-size:32px">2 000 T</div><div class="stat-label">de patates / an · bientôt 5 000</div></div>
     <div class="stat-bubble reveal d2"><div class="stat-num">5 kg</div><div class="stat-label">Sous vide pro · conservation 10 j</div></div>
     <div class="stat-bubble reveal d3"><div class="stat-num t" style="font-size:28px">Livraison Gratuite</div><div class="stat-label">Gard &amp; Hérault</div></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="produits">
+  <div class="wrap">
+    <span class="eyebrow reveal">Gamme complète</span>
+    <h2 class="reveal d1">Nos <em>produits</em></h2>
+    <p class="prod-intro reveal d2">Tous nos produits sont issus de l'<strong>Agria</strong> — la même variété toute l'année, taillée chaque matin dans notre atelier de Lunel. Résultat : un <strong>temps de cuisson constant</strong> dans vos cuisines, sans surprise de livraison en livraison. Conditionnés sous vide 5 kg, sans conservateurs, DLC 10 jours.</p>
+    <div class="prod-grid">
+      <div class="prod-card reveal">
+        <div class="prod-img-wrap">
+          <picture><source srcset="Brand_assets/frites-epaisses.webp" type="image/webp"><img src="Brand_assets/frites-epaisses.png" alt="Frites épaisses" loading="lazy"></picture>
+          <span class="prod-badge">Standard</span>
+        </div>
+        <div class="prod-card-info"><div class="prod-card-name">Frites Épaisses</div></div>
+      </div>
+      <div class="prod-card reveal d1">
+        <div class="prod-img-wrap">
+          <picture><source srcset="Brand_assets/frites-fines.webp" type="image/webp"><img src="Brand_assets/frites-fines.png" alt="Frites fines" loading="lazy"></picture>
+          <span class="prod-badge">Fine</span>
+        </div>
+        <div class="prod-card-info"><div class="prod-card-name">Frites Fines</div></div>
+      </div>
+      <div class="prod-card reveal d2">
+        <div class="prod-img-wrap">
+          <picture><source srcset="Brand_assets/pommes-sautees.webp" type="image/webp"><img src="Brand_assets/pommes-sautees.png" alt="Pommes sautées" loading="lazy"></picture>
+          <span class="prod-badge">Cubes</span>
+        </div>
+        <div class="prod-card-info"><div class="prod-card-name">Pommes Sautées</div></div>
+      </div>
+      <div class="prod-card reveal d2">
+        <div class="prod-img-wrap">
+          <picture><source srcset="Brand_assets/gratin-dauphinois.webp" type="image/webp"><img src="Brand_assets/gratin-dauphinois.png" alt="Gratin Dauphinois" loading="lazy"></picture>
+          <span class="prod-badge">Lamelles</span>
+        </div>
+        <div class="prod-card-info"><div class="prod-card-name">Gratin Dauphinois</div></div>
+      </div>
+      <div class="prod-card reveal d3">
+        <div class="prod-img-wrap">
+          <picture><source srcset="Brand_assets/patatas-bravas.webp" type="image/webp"><img src="Brand_assets/patatas-bravas.png" alt="Patatas Bravas" loading="lazy"></picture>
+          <span class="prod-badge">Chunks</span>
+        </div>
+        <div class="prod-card-info"><div class="prod-card-name">Patatas Bravas</div></div>
+      </div>
+    </div>
+    <div class="prod-meta reveal">
+      <span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 4V3a2 2 0 0 1 4 0v1M8 4V3a2 2 0 0 1 4 0v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Sous vide 5 kg
+      </span>
+      <span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 8.5 7 10l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sans conservateurs
+      </span>
+      <span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 3V2m6 1V2M2 7h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        DLC 10 jours
+      </span>
+    </div>
   </div>
 </section>
 
@@ -460,7 +516,7 @@
       <div>
         <span class="eyebrow reveal">Ce qui nous différencie</span>
         <h2 class="reveal d1">Toujours<br>la même <em>Agria</em></h2>
-        <p class="terroir-body reveal d2">Nous travaillons exclusivement avec l'<strong>Agria</strong> — une seule variété, tout au long de l'année. Nos stocks sont <strong>réservés à l'avance</strong> auprès d'un fournisseur qui s'approvisionne auprès de producteurs partout en France, garantissant une disponibilité permanente quelle que soit la saison.</p>
+        <p class="terroir-body reveal d2">Nous travaillons exclusivement avec l'<strong>Agria</strong> — une seule variété, tout au long de l'année. Nos stocks sont <strong>réservés à l'avance</strong> auprès d'un fournisseur qui s'approvisionne auprès de producteurs partout en France, garantissant une <strong>disponibilité permanente</strong> quelle que soit la saison.</p>
         <p class="terroir-body reveal d2">Pour vos cuisines, ça change tout : <strong>temps de pré-cuisson identique, temps de cuisson identique</strong>, rendu dans l'assiette constant. Pas de surprise selon les livraisons, pas d'adaptation en cuisine.</p>
         <div class="terroir-chips reveal d3">
           <span class="chip terra">100% Agria</span>
@@ -522,7 +578,6 @@
           </div>
         </div>
         <div class="tl-body">
-          <!-- hand-drawn sprout icon -->
           <svg class="tl-icon" width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="#F5E6CC" stroke="#5C3D1E" stroke-width="1.8"/><path d="M19,28 L19,16" stroke="#3D7A52" stroke-width="2" stroke-linecap="round"/><path d="M19,20 C16,15 10,13 12,18 C14,22 18,21 19,20Z" fill="#4E9466" stroke="#3D7A52" stroke-width="1.2"/><path d="M19,20 C22,15 28,13 26,18 C24,22 20,21 19,20Z" fill="#6EA050" stroke="#3D7A52" stroke-width="1.2"/></svg>
           <div class="tl-title">Approvisionnement garanti</div>
           <p class="tl-desc">Nous travaillons exclusivement avec l'<strong>Agria</strong>, réservée à l'avance auprès d'un fournisseur national. Même variété toute l'année — aucune rupture, aucune substitution.</p>
@@ -538,7 +593,6 @@
           </div>
         </div>
         <div class="tl-body">
-          <!-- hand-drawn water drop icon -->
           <svg class="tl-icon" width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="#F5E6CC" stroke="#5C3D1E" stroke-width="1.8"/><path d="M19,10 C19,10 12,18 12,23 C12,27 15,30 19,30 C23,30 26,27 26,23 C26,18 19,10 19,10Z" fill="#7AB8D8" stroke="#4A7898" stroke-width="1.5" stroke-linejoin="round"/><path d="M17,22 C16,20 16,18 18,17" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".6"/></svg>
           <div class="tl-title">Lavage &amp; épluchage</div>
           <p class="tl-desc">Les pommes de terre sont lavées, brossées et épluchées dans notre atelier. Aucun produit chimique, juste de l'eau et du soin artisanal.</p>
@@ -554,11 +608,10 @@
           </div>
         </div>
         <div class="tl-body">
-          <!-- hand-drawn knife icon -->
           <svg class="tl-icon" width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="#F5E6CC" stroke="#5C3D1E" stroke-width="1.8"/><rect x="16" y="22" width="8" height="12" rx="2" fill="#8B5E3C" stroke="#5C3D1E" stroke-width="1.3"/><path d="M17,22 C17,22 16,14 19,9 C22,14 21,22 21,22Z" fill="#D4C4A8" stroke="#5C3D1E" stroke-width="1.3" stroke-linejoin="round"/></svg>
           <div class="tl-title">Taillage sur mesure</div>
-          <p class="tl-desc">Frites classiques, allumettes, chips, lamelles, cubes, potatoes — nous taillons selon votre commande. Découpe personnalisable.</p>
-          <span class="tl-badge">✦ 6 découpes disponibles</span>
+          <p class="tl-desc">Frites épaisses, frites fines, cubes, lamelles, quartiers — nous taillons selon votre commande. Découpe personnalisable.</p>
+          <span class="tl-badge">✦ 5 découpes disponibles</span>
         </div>
       </div>
 
@@ -567,7 +620,6 @@
           <div class="tl-circle">4</div>
         </div>
         <div class="tl-body">
-          <!-- hand-drawn box icon -->
           <svg class="tl-icon" width="38" height="38" viewBox="0 0 38 38"><circle cx="19" cy="19" r="17" fill="#F5E6CC" stroke="#5C3D1E" stroke-width="1.8"/><rect x="10" y="15" width="18" height="13" rx="2" fill="#C9976A" stroke="#5C3D1E" stroke-width="1.4"/><path d="M10,18 L28,18" stroke="#5C3D1E" stroke-width="1.2"/><path d="M13,11 L13,16" stroke="#5C3D1E" stroke-width="1.4" stroke-linecap="round"/><path d="M25,11 L25,16" stroke="#5C3D1E" stroke-width="1.4" stroke-linecap="round"/><path d="M13,11 C13,9 25,9 25,11" stroke="#5C3D1E" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
           <div class="tl-title">Conditionnement &amp; livraison</div>
           <p class="tl-desc">Poches de 5 kg sous vide le jour même. Livrées directement chez vous dans le Gard et l'Hérault, gratuitement, sans minimum de commande.</p>
@@ -575,50 +627,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="produits">
-  <div class="wrap">
-    <span class="eyebrow light reveal">Gamme complète</span>
-    <h2 class="on-dark reveal d1">Nos <em>produits</em></h2>
-    <div class="prod-grid">
-      <div class="prod-tile reveal">
-        <div class="prod-inner"><picture><source srcset="Brand_assets/frites-epaisses.webp" type="image/webp"><img src="Brand_assets/frites-epaisses.png" alt="Frites épaisses" loading="lazy"></picture></div>
-        <div class="prod-over"><div class="prod-cat">Standard</div><div class="prod-name">Frites Épaisses</div></div>
-      </div>
-      <div class="prod-tile reveal d1">
-        <div class="prod-inner"><picture><source srcset="Brand_assets/frites-fines.webp" type="image/webp"><img src="Brand_assets/frites-fines.png" alt="Frites fines" loading="lazy"></picture></div>
-        <div class="prod-over"><div class="prod-cat">Fine</div><div class="prod-name">Frites Fines</div></div>
-      </div>
-      <div class="prod-tile reveal d2">
-        <div class="prod-inner"><picture><source srcset="Brand_assets/pommes-sautees.webp" type="image/webp"><img src="Brand_assets/pommes-sautees.png" alt="Pommes sautées" loading="lazy"></picture></div>
-        <div class="prod-over"><div class="prod-cat">Cubes</div><div class="prod-name">Pommes Sautées</div></div>
-      </div>
-      <div class="prod-tile reveal d2">
-        <div class="prod-inner"><picture><source srcset="Brand_assets/gratin-dauphinois.webp" type="image/webp"><img src="Brand_assets/gratin-dauphinois.png" alt="Gratin Dauphinois" loading="lazy"></picture></div>
-        <div class="prod-over"><div class="prod-cat">Lamelles</div><div class="prod-name">Gratin Dauphinois</div></div>
-      </div>
-      <div class="prod-tile reveal d3">
-        <div class="prod-inner"><picture><source srcset="Brand_assets/patatas-bravas.webp" type="image/webp"><img src="Brand_assets/patatas-bravas.png" alt="Patatas Bravas" loading="lazy"></picture></div>
-        <div class="prod-over"><div class="prod-cat">Chunks</div><div class="prod-name">Patatas Bravas</div></div>
-      </div>
-    </div>
-    <div class="prod-meta reveal" style="display:flex;gap:24px;flex-wrap:wrap;margin-top:22px;padding:0 2px;">
-      <span style="display:flex;align-items:center;gap:8px;font-family:'Caveat',cursive;font-size:15px;font-weight:600;color:rgba(245,230,204,.65);">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="2" stroke="rgba(245,230,204,.5)" stroke-width="1.4"/><path d="M4 4V3a2 2 0 0 1 4 0v1M8 4V3a2 2 0 0 1 4 0v1" stroke="rgba(245,230,204,.5)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        Sous vide 5 kg
-      </span>
-      <span style="display:flex;align-items:center;gap:8px;font-family:'Caveat',cursive;font-size:15px;font-weight:600;color:rgba(245,230,204,.65);">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 0V1m0 14v-1M2 8H1m14 0h-1" stroke="rgba(245,230,204,.5)" stroke-width="1.4" stroke-linecap="round"/><path d="M5.5 8.5 7 10l3.5-3.5" stroke="rgba(245,230,204,.65)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Sans conservateurs
-      </span>
-      <span style="display:flex;align-items:center;gap:8px;font-family:'Caveat',cursive;font-size:15px;font-weight:600;color:rgba(245,230,204,.65);">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="rgba(245,230,204,.5)" stroke-width="1.4"/><path d="M5 3V2m6 1V2M2 7h12" stroke="rgba(245,230,204,.5)" stroke-width="1.4" stroke-linecap="round"/><path d="M5 10h1m4 0h1M5 12.5h1m4 0h1" stroke="rgba(245,230,204,.5)" stroke-width="1.4" stroke-linecap="round"/></svg>
-        DLC 10 jours
-      </span>
     </div>
   </div>
 </section>
@@ -642,7 +650,7 @@
         </li>
         <li class="ben-item reveal d1">
           <div class="ben-icon"><svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="13" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><rect x="11" y="17" width="6" height="8" rx="2" fill="#C9976A" stroke="rgba(255,255,255,.6)" stroke-width="1"/><path d="M12,17 C12,17 11,10 14,6 C17,10 16,17 16,17Z" fill="rgba(255,255,255,.7)" stroke="rgba(255,255,255,.8)" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-          <div class="ben-txt"><strong>6 découpes disponibles</strong><span>Adaptées à chaque type de plat.</span></div>
+          <div class="ben-txt"><strong>5 découpes disponibles</strong><span>Adaptées à chaque type de plat.</span></div>
         </li>
         <li class="ben-item reveal d2">
           <div class="ben-icon"><svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="13" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/><rect x="7" y="11" width="14" height="10" rx="2" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.6)" stroke-width="1.3"/><path d="M7,14 L21,14" stroke="rgba(255,255,255,.5)" stroke-width="1"/><path d="M10,8 L10,12 M18,8 L18,12" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round"/><path d="M10,8 C10,6 18,6 18,8" stroke="rgba(255,255,255,.5)" fill="none" stroke-linecap="round"/></svg></div>
@@ -707,10 +715,10 @@
   <div class="wrap">
     <span class="eyebrow reveal" style="display:block;text-align:center">Ils nous font confiance</span>
     <h2 style="text-align:center" class="reveal d1">Nos <em>références</em></h2>
-    <p class="refs-sub reveal d2" style="text-align:center;margin:0 auto 32px">Restaurateurs, traiteurs, grandes surfaces — une confiance construite sur la qualité.</p>
+    <p class="refs-sub reveal d2" style="text-align:center;margin:0 auto 32px">Restaurateurs, traiteurs, grandes surfaces — une confiance construite sur la qualité. Livraison directe dans le Gard &amp; l'Hérault, et disponible plus largement dans le Sud via nos distributeurs.</p>
     <div class="distrib-row reveal">
       <div class="dist-pill"><span class="dist-name lec">E.Leclerc</span><span class="dist-role">Grande distribution</span></div>
-      <div class="dist-pill"><span class="dist-name met">Metro</span><span class="dist-role">Grossiste CHR · Montpellier</span></div>
+      <div class="dist-pill"><span class="dist-name met">Metro</span><span class="dist-role">Référencé dans 10 agences · Sud de la France</span></div>
       <div class="dist-pill"><span class="dist-name">Soframa</span><span class="dist-role">Aimargues · Distribution</span></div>
     </div>
     <div class="resto-grid reveal d1">
