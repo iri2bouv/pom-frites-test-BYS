@@ -275,21 +275,7 @@
     .hist-title { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 22px; color: var(--earth); margin-bottom: 8px; line-height: 1.2; }
     .hist-text { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; }
     .hist-text strong { color: var(--earth); font-weight: 500; }
-
-    /* ── REFERENCES ──────────────────────────────────── */
-    #references { background: var(--sand); }
     .refs-sub { font-size: 14px; font-style: italic; color: rgba(45,27,14,.82); max-width: 460px; margin-bottom: 32px; line-height: 1.75; }
-    .distrib-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-    .dist-pill { background: var(--white); border-radius: 100px; border: 1px solid var(--border); padding: 12px 22px; flex: 1; min-width: 120px; display: flex; flex-direction: column; align-items: center; gap: 2px; box-shadow: 0 3px 14px rgba(45,27,14,.06); transition: transform .25s, box-shadow .25s; }
-    .dist-pill:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(45,27,14,.1); }
-    .dist-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 18px; letter-spacing: -.01em; color: var(--earth); }
-    .dist-name.lec { color: #003189; } .dist-name.met { color: #CC0000; }
-    .dist-role { font-family: 'Caveat', cursive; font-size: 12px; color: var(--muted); }
-    .metro-card { background: var(--white); border-radius: 20px; border: 1px solid var(--border); padding: 24px 22px; box-shadow: 0 4px 20px rgba(45,27,14,.06); max-width: 620px; margin: 0 auto; }
-    .metro-head { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-bottom: 18px; text-align: center; }
-    .metro-head .dist-name { font-size: 26px; }
-    .metro-cities { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-    .metro-city { background: var(--sand); border: 1px solid var(--border); border-radius: 100px; padding: 6px 15px; font-family: 'Caveat', cursive; font-size: 15px; font-weight: 600; color: var(--earth); }
 
     /* ── CONTACT ─────────────────────────────────────── */
     #contact { background: var(--cream); }
@@ -376,7 +362,6 @@
     <li><a href="#produits">Nos produits</a></li>
     <li><a href="#process">Notre procédé</a></li>
     <li><a href="#histoire">Notre histoire</a></li>
-    <li><a href="#references">Où nous trouver</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Demander un devis</a>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -385,7 +370,6 @@
   <a href="#produits" onclick="closeMenu()">Nos produits</a>
   <a href="#process" onclick="closeMenu()">Notre procédé</a>
   <a href="#histoire" onclick="closeMenu()">Notre histoire</a>
-  <a href="#references" onclick="closeMenu()">Où nous trouver</a>
   <a href="#contact" class="m-cta" onclick="closeMenu()">Demander un devis</a>
 </nav>
 
@@ -686,35 +670,6 @@
           <p class="hist-text">L'atelier s'est développé. Les machines ont remplacé les couteaux, sans jamais remplacer l'exigence. Chaque semaine, des <strong>tonnes de pommes de terre taillées</strong> partent vers les restaurants, traiteurs et grandes surfaces du Gard et de l'Hérault.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- OÙ NOUS TROUVER -->
-<section id="references">
-  <div class="wrap">
-    <span class="eyebrow reveal" style="display:block;text-align:center">Distribution</span>
-    <h2 style="text-align:center" class="reveal d1">Où nous <em>trouver</em></h2>
-    <p class="refs-sub reveal d2" style="text-align:center;margin:0 auto 36px">Livraison directe dans le Gard &amp; l'Hérault. Nos produits sont aussi disponibles plus largement dans le Sud via nos distributeurs.</p>
-    <div class="metro-card reveal">
-      <div class="metro-head">
-        <span class="dist-name met">Metro</span>
-        <span class="dist-role">Grossiste CHR · référencé dans 9 agences</span>
-      </div>
-      <div class="metro-cities">
-        <span class="metro-city">Avignon</span>
-        <span class="metro-city">Nîmes</span>
-        <span class="metro-city">Alès</span>
-        <span class="metro-city">Montpellier</span>
-        <span class="metro-city">Béziers</span>
-        <span class="metro-city">Narbonne</span>
-        <span class="metro-city">Carcassonne</span>
-        <span class="metro-city">Perpignan</span>
-        <span class="metro-city">Valence</span>
-      </div>
-    </div>
-    <div class="distrib-row reveal d1" style="max-width:420px;margin:16px auto 0">
-      <div class="dist-pill"><span class="dist-name lec">E.Leclerc</span><span class="dist-role">Grande distribution · format 1 kg</span></div>
     </div>
   </div>
 </section>
