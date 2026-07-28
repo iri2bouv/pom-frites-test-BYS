@@ -91,7 +91,7 @@
     nav.scrolled { box-shadow: 0 2px 20px rgba(45,27,14,.08); }
     .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo img { height: 40px; width: auto; display: block; }
-    .nav-links { display: none; list-style: none; gap: 36px; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); }
+    .nav-links { display: none; list-style: none; gap: clamp(18px, 3vw, 36px); align-items: center; }
     .nav-links a { font-size: 13px; font-style: italic; color: var(--muted); text-decoration: none; transition: color .2s; }
     .nav-links a:hover { color: var(--earth); }
     .nav-cta { display: none; align-items: center; gap: 7px; background: var(--terra); color: white !important; padding: 9px 22px; border-radius: 100px; font-size: 13px !important; font-weight: 500 !important; text-decoration: none; transition: background .2s, transform .15s !important; box-shadow: 0 4px 18px rgba(200,82,46,.3); }
@@ -124,7 +124,8 @@
     }
     .hero-inner {
       position: relative; z-index: 1; flex: 1;
-      display: flex; flex-direction: column; justify-content: flex-end;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
       padding: 48px 28px 56px;
     }
     .hero-label {
@@ -140,9 +141,9 @@
       color: var(--white); margin-bottom: 18px;
     }
     h1.hero-h1 em { font-style: italic; color: var(--terra2); }
-    .hero-sub { font-size: 15px; font-weight: 300; color: rgba(245,230,204,.75); line-height: 1.7; max-width: 500px; margin-bottom: 30px; }
+    .hero-sub { font-size: 15px; font-weight: 300; color: rgba(245,230,204,.75); line-height: 1.7; max-width: 500px; margin: 0 auto 30px; }
     .hero-sub strong { color: var(--sand); font-weight: 500; }
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
     .btn-terra { display: inline-flex; align-items: center; gap: 7px; background: var(--terra); color: white; padding: 13px 28px; border-radius: 100px; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: 0 6px 24px rgba(200,82,46,.4); transition: background .2s, transform .2s; }
     .btn-terra:hover { background: var(--terra2); transform: translateY(-2px); }
     .btn-ghost { display: inline-flex; align-items: center; gap: 7px; border: 1px solid rgba(245,230,204,.35); color: rgba(245,230,204,.85); padding: 12px 22px; border-radius: 100px; font-size: 14px; font-weight: 400; text-decoration: none; backdrop-filter: blur(6px); transition: border-color .2s, color .2s; }
@@ -316,16 +317,15 @@
 
     /* ── DESKTOP ─────────────────────────────────────── */
     @media(min-width:768px){
-      nav{padding:0 56px;height:68px}
+      nav{padding:0 clamp(24px,4vw,56px);height:68px}
       .burger{display:none}
-      .nav-links{display:flex}
-      .nav-links a{font-weight:600;font-style:normal;color:var(--earth);font-size:13px}
-      .nav-cta{display:inline-flex}
+      .nav-links{display:flex;flex:1;justify-content:center}
+      .nav-links a{font-weight:600;font-style:normal;color:var(--earth);font-size:13px;white-space:nowrap}
+      .nav-cta{display:inline-flex;white-space:nowrap;flex-shrink:0}
 
       #hero{min-height:100svh}
-      .hero-inner{justify-content:center;align-items:center;text-align:center;padding:120px 64px 80px}
+      .hero-inner{padding:120px 64px 80px}
       .hero-sub{max-width:560px}
-      .hero-actions{justify-content:center}
 
       #stats{padding:64px 56px}
       .stats-organic{grid-template-columns:repeat(4,1fr);gap:18px}
@@ -350,6 +350,14 @@
       .btn-submit{width:auto;padding:15px 40px}
 
       footer{flex-direction:row;justify-content:space-between;align-items:center;padding:28px 56px}
+    }
+
+    /* ── NAV LARGE ───────────────────────────────────── */
+    /* Au-dessus de 900px il y a assez de place pour recentrer les liens sur la
+       fenetre (design d'origine). En dessous, le calage flex evite qu'ils
+       passent sous le bouton CTA. */
+    @media(min-width:900px){
+      .nav-links{position:absolute;left:50%;transform:translateX(-50%);flex:none;gap:36px}
     }
   </style>
 </head>
@@ -383,7 +391,7 @@
     </picture>
   </div>
   <div class="hero-inner">
-    <picture><source srcset="Brand_assets/logo-hero.webp" type="image/webp"><img src="Brand_assets/logo-hero.png" alt="Pom'Frites" style="height:180px;width:auto;margin-bottom:20px;display:block;" fetchpriority="high"></picture>
+    <picture><source srcset="Brand_assets/logo-hero.webp" type="image/webp"><img src="Brand_assets/logo-hero.png" alt="Pom'Frites" style="height:180px;width:auto;margin:0 auto 20px;display:block;" fetchpriority="high"></picture>
     <div class="hero-label"><span class="hero-label-dot"></span>Fournisseur pro · Gard &amp; Hérault</div>
     <h1 class="hero-h1">La frite<br><em>fraîche,</em><br>livrée.</h1>
     <p class="hero-sub">Pommes de terre <strong>Agria</strong> taillées chaque matin, sous vide 5 kg, livrées dans le <strong>Gard &amp; l'Hérault</strong>.</p>
